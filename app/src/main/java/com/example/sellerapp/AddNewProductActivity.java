@@ -1,4 +1,4 @@
-package com.example.sellerapp;
+ package com.example.sellerapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -39,7 +39,7 @@ public class AddNewProductActivity extends AppCompatActivity {
     private String CategoryName, Description, Price, Pname, saveCurrentDate, saveCurrentTime;
     private Button AddNewProductButton, ViewAddedProductsBtn;
     private  String sName,sAddress,sPhone,sEmail,sID;
-    private ImageView InputProductImage;
+    private ImageView InputProductImage,productImageHolder;
     private EditText InputProductName, InputProductDescription, InputProductPrice;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
@@ -72,6 +72,7 @@ public class AddNewProductActivity extends AppCompatActivity {
         AddNewProductButton = (Button) findViewById(R.id.add_new_product);
         ViewAddedProductsBtn = (Button)findViewById(R.id.view_added_products);
         InputProductImage = (ImageView) findViewById(R.id.seller_iv_camera);
+        productImageHolder = (ImageView) findViewById(R.id.select_product_image);
         InputProductName = (EditText) findViewById(R.id.product_name);
         InputProductDescription = (EditText) findViewById(R.id.product_description);
         InputProductPrice = (EditText) findViewById(R.id.product_price);
@@ -147,7 +148,7 @@ public class AddNewProductActivity extends AppCompatActivity {
         if (requestCode==GalleryPick  &&  resultCode==RESULT_OK  &&  data!=null)
         {
             ImageUri = data.getData();
-            InputProductImage.setImageURI(ImageUri);
+            productImageHolder.setImageURI(ImageUri);
         }
     }
 
@@ -185,7 +186,7 @@ public class AddNewProductActivity extends AppCompatActivity {
 
     private void StoreProductInformation()
     {
-        loadingBar.setTitle("Add New Product");
+        loadingBar.setTitle("Adding New Product");
         loadingBar.setMessage("Dear Seller, please wait while we are adding the new product.");
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
@@ -252,26 +253,6 @@ public class AddNewProductActivity extends AppCompatActivity {
         });
     }
 
-//    private void saveImageToDb() {
-//
-//        HashMap<String,Object> imageMap = new HashMap<>();
-//        imageMap.put("image", downloadImageUrl);
-//        ImageRef.child("UserView").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Products")
-//                .child(productRandomKey).updateChildren(imageMap)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-//                        if (task.isSuccessful()){
-//                            Toast.makeText(SellerAddNewProductActivity.this, "Image Added To Cart", Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                    }
-//                });
-//
-//
-//
-//    }
-
 
 
     private void SaveProductInfoToDatabase()
@@ -283,7 +264,7 @@ public class AddNewProductActivity extends AppCompatActivity {
         productMap.put("description", Description);
         productMap.put("image", downloadImageUrl);
         productMap.put("category", CategoryName);
-        productMap.put("price", Price);
+        productMap.put("price", Integer.valueOf(Price));
         productMap.put("pname", Pname);
         productMap.put("sellerID", sID);
         productMap.put("sellerName", sName);
