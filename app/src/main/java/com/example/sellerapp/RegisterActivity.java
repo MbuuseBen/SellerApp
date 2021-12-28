@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,13 +19,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private Button sellerloginBegin,registerBtn;
+    private Button registerBtn;
+    private TextView sellerloginBegin;
     private EditText nameInput,phoneInput,emailInput,passwordInput,addressInput;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
@@ -36,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        sellerloginBegin = (Button)findViewById(R.id.seller_already_have_account_btn);
+        sellerloginBegin = findViewById(R.id.seller_already_have_account_btn);
 
         registerBtn = (Button)findViewById(R.id.seller_register_btn);
 
@@ -46,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.seller_password);
         addressInput = findViewById(R.id.seller_address);
         loadingBar = new ProgressDialog(this);
-
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                        public void onComplete(@NonNull  Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
                                 String uid = mAuth.getCurrentUser().getUid();
@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 rootRef.child("Sellers").child(uid).updateChildren(sellerMap)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
-                                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                            public void onComplete(@NonNull  Task<Void> task) {
                                                 loadingBar.dismiss();
                                                 Toast.makeText(RegisterActivity.this, "You are Registered Successfully , Please Login",Toast.LENGTH_SHORT).show();
 

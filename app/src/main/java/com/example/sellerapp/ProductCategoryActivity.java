@@ -5,13 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class ProductCategoryActivity extends AppCompatActivity {
     private ImageView calculator,pencil,notebook,stapler;
     private ImageView paperClip,ruler,scissors,glue;
     private ImageView pushpin,punchingMachine,tape,dangerCutter;
-    private ImageView officePaperClip,shapener,quillInk,pen;
+    private ImageView officePaperClip,shapener,sets,pen;
 
     // private Button LogoutBtn, CheckOrdersBtn, maintainProductsBtn;
 
@@ -20,28 +22,28 @@ public class ProductCategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_category);
+        setContentView(R.layout.product_category_layout4);
 
 
-        calculator = (ImageView) findViewById(R.id.calculator);
-        pencil = (ImageView) findViewById(R.id.pencil);
-        notebook = (ImageView) findViewById(R.id.notebook);
-        stapler = (ImageView) findViewById(R.id.stapler);
+        calculator = (ImageView) findViewById(R.id.product_image_calculator);
+        pencil = (ImageView) findViewById(R.id.product_image_pencil);
+        notebook = (ImageView) findViewById(R.id.product_image_notebooks);
+        stapler = (ImageView) findViewById(R.id.product_image_stapler);
 
-        paperClip = (ImageView) findViewById(R.id.paper_clip);
-        ruler = (ImageView) findViewById(R.id.ruler);
-        scissors = (ImageView) findViewById(R.id.scissor);
-        glue = (ImageView) findViewById(R.id.glue);
+        paperClip = (ImageView) findViewById(R.id.product_image_clips);
+        ruler = (ImageView) findViewById(R.id.product_image_rulers);
+        scissors = (ImageView) findViewById(R.id.product_image_scissors);
+        glue = (ImageView) findViewById(R.id.product_image_glue);
 
-        pushpin = (ImageView) findViewById(R.id.pushpin);
+        pushpin = (ImageView) findViewById(R.id.product_image_pins);
         punchingMachine = (ImageView) findViewById(R.id.punching_machine);
-        tape = (ImageView) findViewById(R.id.tape);
-        dangerCutter = (ImageView) findViewById(R.id.danger_cutter);
+        tape = (ImageView) findViewById(R.id.product_image_tape);
+        dangerCutter = (ImageView) findViewById(R.id.product_image_cutters);
 
         officePaperClip = (ImageView) findViewById(R.id.office_paper_clip);
-        shapener = (ImageView) findViewById(R.id.shapener);
-        quillInk = (ImageView) findViewById(R.id.quill_ink);
-        pen = (ImageView) findViewById(R.id.pen);
+        shapener = (ImageView) findViewById(R.id.product_image_sharpener);
+        sets = (ImageView) findViewById(R.id.product_image_sets);
+        pen = (ImageView) findViewById(R.id.product_image_pens);
 
 
         calculator.setOnClickListener(new View.OnClickListener() {
@@ -198,12 +200,12 @@ public class ProductCategoryActivity extends AppCompatActivity {
             }
         });
 
-        quillInk.setOnClickListener(new View.OnClickListener() {
+        sets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(ProductCategoryActivity.this, AddNewProductActivity.class);
-                intent.putExtra("category", "quillInk");
+                intent.putExtra("category", "sets");
                 startActivity(intent);
             }
         });
@@ -219,6 +221,16 @@ public class ProductCategoryActivity extends AppCompatActivity {
             }
         });
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.topAppBar);
+        mToolbar.setTitle("Choose a Category");
+        setSupportActionBar(mToolbar);
+
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
     }
 }

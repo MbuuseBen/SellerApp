@@ -6,26 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ProductCategoryActivity">
 
-    <TextView
-        android:id="@+id/slogan_category"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Add New Product"
-        android:textAlignment="center"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:gravity="center_horizontal" />
+        android:id="@+id/r5">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar1"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/slogan_category"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_below="@+id/r5"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="Add New Product"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="26sp"-->
+<!--        android:textStyle="bold"-->
+
+<!--        android:gravity="center_horizontal" />-->
 
 
     <LinearLayout
         android:id="@+id/linear1_category_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/slogan_category"
+        android:layout_below="@+id/r5"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:gravity="center"

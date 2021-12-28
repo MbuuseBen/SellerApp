@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -126,7 +128,16 @@ public class AddNewProductActivity extends AppCompatActivity {
                     }
                 });
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.topAppBar);
+        mToolbar.setTitle("Add New Product");
+        setSupportActionBar(mToolbar);
 
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
     }
 
 

@@ -13,7 +13,7 @@ import com.example.sellerapp.R;
 public class SellerItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 {
     public TextView txtProductName, txtProductDescription, txtProductPrice, txtProductStatus;
-    public ImageView imageView;
+    public ImageView imageView,deleteBtn,editBtn;
     public ItemClickListner listner;
 
 
@@ -27,6 +27,8 @@ public class SellerItemViewHolder extends RecyclerView.ViewHolder implements Vie
         txtProductDescription = (TextView) itemView.findViewById(R.id.product_seller_description);
         txtProductPrice = (TextView) itemView.findViewById(R.id.product_seller_price);
         txtProductStatus = (TextView) itemView.findViewById(R.id.product_status);
+        deleteBtn = (ImageView) itemView.findViewById(R.id.deleteBtn2);
+        editBtn = (ImageView) itemView.findViewById(R.id.edit_item);
     }
 
     public void setItemClickListner(ItemClickListner listner)
