@@ -131,7 +131,9 @@ public class ViewEditableProductsActivity extends AppCompatActivity {
                         holder.editBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-
+                                Intent intent = new Intent(ViewEditableProductsActivity.this, EditProductActivity.class);
+                                intent.putExtra("pid", model.getPid());
+                                startActivity(intent);
                             }
                         });
 //                        holder.itemView.setOnClickListener(new View.OnClickListener() {

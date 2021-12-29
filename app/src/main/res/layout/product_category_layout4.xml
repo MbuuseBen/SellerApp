@@ -8,11 +8,28 @@
     android:rowCount="3"
     android:orientation="horizontal">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/r5">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/top_app_bar1"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/row_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/r5"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="5dp"
@@ -179,7 +196,10 @@
             android:id="@+id/category_clips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="7dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="7dp"
             android:layout_toEndOf="@+id/category_textbooks">
 
             <ImageView
@@ -327,7 +347,7 @@
                 android:layout_below="@+id/product_image_rulers"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_horizontal"
-                android:text="Clips"
+                android:text="Rulers"
                 android:textAlignment="center"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textSize="15dp" />
@@ -356,7 +376,7 @@
                 android:layout_below="@+id/product_image_tape"
                 android:layout_centerHorizontal="true"
                 android:gravity="left"
-                android:text="PushPin"
+                android:text="Tape"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textSize="15dp" />
 
@@ -378,17 +398,16 @@
                 android:src="@drawable/scissors_color" />
 
             <TextView
+                android:id="@+id/category_txt_scissors"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:id="@+id/category_txt_scissors"
                 android:layout_below="@+id/product_image_scissors"
-                android:gravity="center"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="Scissors"
                 android:textAlignment="center"
-                android:text="Staplers"
-                android:textSize="15dp"
-                />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="15dp" />
 
         </RelativeLayout>
 

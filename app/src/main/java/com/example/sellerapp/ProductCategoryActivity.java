@@ -13,7 +13,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
     private ImageView calculator,pencil,notebook,stapler;
     private ImageView paperClip,ruler,scissors,glue;
     private ImageView pushpin,punchingMachine,tape,dangerCutter;
-    private ImageView officePaperClip,shapener,sets,pen;
+    private ImageView textbooks,shapener,sets,pen;
 
     // private Button LogoutBtn, CheckOrdersBtn, maintainProductsBtn;
 
@@ -36,11 +36,11 @@ public class ProductCategoryActivity extends AppCompatActivity {
         glue = (ImageView) findViewById(R.id.product_image_glue);
 
         pushpin = (ImageView) findViewById(R.id.product_image_pins);
-        punchingMachine = (ImageView) findViewById(R.id.punching_machine);
+        punchingMachine = (ImageView) findViewById(R.id.product_image_punch);
         tape = (ImageView) findViewById(R.id.product_image_tape);
         dangerCutter = (ImageView) findViewById(R.id.product_image_cutters);
 
-        officePaperClip = (ImageView) findViewById(R.id.office_paper_clip);
+        textbooks = (ImageView) findViewById(R.id.product_image_textbooks);
         shapener = (ImageView) findViewById(R.id.product_image_sharpener);
         sets = (ImageView) findViewById(R.id.product_image_sets);
         pen = (ImageView) findViewById(R.id.product_image_pens);
@@ -180,12 +180,12 @@ public class ProductCategoryActivity extends AppCompatActivity {
         });
 
 
-        officePaperClip.setOnClickListener(new View.OnClickListener() {
+        textbooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(ProductCategoryActivity.this, AddNewProductActivity.class);
-                intent.putExtra("category", "officePaperClip");
+                intent.putExtra("category", "textbooks");
                 startActivity(intent);
             }
         });

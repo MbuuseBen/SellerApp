@@ -1,7 +1,9 @@
 package com.example.sellerapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,6 +66,19 @@ public class EditProductActivity extends AppCompatActivity {
                 deleteThisProduct();
             }
         });
+
+
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.topAppBar);
+        mToolbar.setTitle("Edit Products");
+        setSupportActionBar(mToolbar);
+
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
     }
 
     private void deleteThisProduct() {
