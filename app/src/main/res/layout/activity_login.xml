@@ -34,28 +34,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_seller"
-        android:layout_marginTop="10dp"
-        android:padding="20dp"
-        android:inputType="textEmailAddress"
-        android:hint="Email Address"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/ic_baseline_email_icon1"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
-        />
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:padding="20dp" />
 
     <EditText
         android:id="@+id/seller_login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seller_login_email"
-        android:layout_marginTop="10dp"
-        android:padding="20dp"
-        android:inputType="textPassword"
-        android:hint="Password"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/ic_baseline_lock_open_24"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
-        />
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="20dp" />
 
     <Button
         android:id="@+id/seller_login_btn"
@@ -71,7 +71,20 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
-
+    <TextView
+        android:id="@+id/register_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seller_login_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="15dp"
+        android:text="Don't have an account? Sign up now"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        />
 
 
 </RelativeLayout>

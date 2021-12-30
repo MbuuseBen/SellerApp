@@ -33,13 +33,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_seller"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:hint="Name..."
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
-        />
+        android:drawableStart="@drawable/ic_baseline_account_circle_24"
+        android:hint="Name"
+        android:padding="10dp" />
 
 
     <EditText
@@ -47,42 +47,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seller_name"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:hint="PhoneNumber..."
-        android:inputType="number"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
-        />
+        android:drawableStart="@drawable/ic_baseline_phone_iphone_24"
+        android:hint="PhoneNumber"
+        android:inputType="number"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/seller_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seller_phone"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:inputType="textEmailAddress"
-        android:hint="Email Address"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
+        android:drawableStart="@drawable/ic_baseline_email_icon1"
         android:background="@drawable/input_design"
-        />
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/seller_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/seller_email"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:inputType="textPassword"
-        android:hint="Password"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/input_design"
-        />
+        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="10dp" />
 
 
     <EditText
@@ -128,6 +128,6 @@
         android:padding="10dp"
         android:text="Already Have Account? Login"
         android:textAllCaps="false"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
 </RelativeLayout>

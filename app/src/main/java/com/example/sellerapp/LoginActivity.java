@@ -3,9 +3,11 @@ package com.example.sellerapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,8 +24,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginSellerBtn;
     private EditText emailInput, passwordInput;
     private ProgressDialog loadingBar;
-
+    private TextView UserRegisterLink;
     private FirebaseAuth mAuth;
+    boolean isEmailValid, isPasswordValid;
 
 
 
@@ -33,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-
+        UserRegisterLink = (TextView)findViewById(R.id.register_link);
         loginSellerBtn = (Button)findViewById(R.id.seller_login_btn);
         emailInput = findViewById(R.id.seller_login_email);
         passwordInput = findViewById(R.id.seller_login_password);
@@ -42,9 +45,51 @@ public class LoginActivity extends AppCompatActivity {
         loginSellerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginSeller();
+                SetValidation();
             }
         });
+
+        UserRegisterLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+
+
+        });
+
+    }
+
+    public void SetValidation() {
+        // Check for a valid email address.
+        if (emailInput.getText().toString().isEmpty()) {
+            emailInput.setError(getResources().getString(R.string.email_error));
+            isEmailValid = false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput.getText().toString()).matches()) {
+            emailInput.setError(getResources().getString(R.string.error_invalid_email));
+            isEmailValid = false;
+        } else  {
+            isEmailValid = true;
+        }
+
+        // Check for a valid password.
+        if (passwordInput.getText().toString().isEmpty()) {
+            passwordInput.setError(getResources().getString(R.string.password_error));
+            isPasswordValid = false;
+        } else if (passwordInput.getText().length() < 10) {
+            passwordInput.setError(getResources().getString(R.string.error_invalid_password));
+            isPasswordValid = false;
+        } else  {
+            isPasswordValid = true;
+        }
+
+        if (isEmailValid && isPasswordValid) {
+            loginSeller();
+
+        }
+
     }
 
     private void loginSeller() {
@@ -66,8 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 loadingBar.dismiss();
                                 FirebaseUser user = mAuth.getCurrentUser();
-
-
+                                Toast.makeText(getApplicationContext(), "Logged In Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();

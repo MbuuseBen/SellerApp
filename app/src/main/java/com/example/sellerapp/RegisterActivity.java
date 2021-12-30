@@ -3,6 +3,7 @@ package com.example.sellerapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText nameInput,phoneInput,emailInput,passwordInput,addressInput;
     private FirebaseAuth mAuth;
     private ProgressDialog loadingBar;
+    boolean isNameValid, isEmailValid, isPhoneValid, isPasswordValid,isAddressValid;
 
 
 
@@ -65,9 +67,62 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registerSeller();
+                SetValidation();
             }
         });
+    }
+
+    public void SetValidation() {
+        // Check for a valid name.
+        if (nameInput.getText().toString().isEmpty()) {
+            nameInput.setError(getResources().getString(R.string.name_error));
+            isNameValid = false;
+        } else  {
+            isNameValid = true;
+        }
+
+        if (addressInput.getText().toString().isEmpty()) {
+            addressInput.setError(getResources().getString(R.string.address_error));
+            isAddressValid = false;
+        } else  {
+            isAddressValid = true;
+        }
+
+        // Check for a valid email address.
+        if (emailInput.getText().toString().isEmpty()) {
+            emailInput.setError(getResources().getString(R.string.email_error));
+            isEmailValid = false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput.getText().toString()).matches()) {
+            emailInput.setError(getResources().getString(R.string.error_invalid_email));
+            isEmailValid = false;
+        } else  {
+            isEmailValid = true;
+        }
+
+        // Check for a valid phone number.
+        if (phoneInput.getText().toString().isEmpty()) {
+            phoneInput.setError(getResources().getString(R.string.phone_error));
+            isPhoneValid = false;
+        } else  {
+            isPhoneValid = true;
+        }
+
+        // Check for a valid password.
+        if (passwordInput.getText().toString().isEmpty()) {
+            passwordInput.setError(getResources().getString(R.string.password_error));
+            isPasswordValid = false;
+        } else if (passwordInput.getText().length() < 10) {
+            passwordInput.setError(getResources().getString(R.string.error_invalid_password));
+            isPasswordValid = false;
+        } else  {
+            isPasswordValid = true;
+        }
+
+        if (isNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
+            registerSeller();
+            Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void registerSeller() {

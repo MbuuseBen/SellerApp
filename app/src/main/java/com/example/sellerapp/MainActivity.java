@@ -71,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         viewSellerDetails();
         Paper.init(this);
 
-
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
 viewProducts.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -105,6 +106,57 @@ addAProduct.setOnClickListener(new View.OnClickListener() {
         // in this case it is home fragment
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            // By using switch we can easily get
+            // the selected fragment
+            // by using there id.
+            Fragment selectedFragment = null;
+            switch (item.getItemId()) {
+                case R.id.seller_home:
+
+
+
+                    Intent home = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(home);
+
+
+
+                    break;
+
+
+                case R.id.seller_add:
+
+                    Intent seller = new Intent(MainActivity.this, ProductCategoryActivity.class);
+                    startActivity(seller);
+
+
+                    break;
+
+
+                case R.id.seller_logout:
+
+
+                    Paper.book().destroy();
+                    FirebaseAuth.getInstance().signOut();
+
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                    break;
+            }
+            // It will help to replace the
+            // one fragment to other.
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.fragment_container, selectedFragment)
+//                    .commit();
+            return true;
+        }
+    };
 
 private void  viewSellerDetails(){
     DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("Sellers");

@@ -22,12 +22,21 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_below="@+id/r5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:isScrollContainer="true" >
 
     <FrameLayout
         android:id="@+id/product_picture_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/r5"
         android:layout_marginTop="10dp">
 
         <ImageView
@@ -141,4 +150,6 @@
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

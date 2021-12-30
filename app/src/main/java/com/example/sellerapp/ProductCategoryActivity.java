@@ -2,12 +2,20 @@ package com.example.sellerapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+
+import io.paperdb.Paper;
 
 public class ProductCategoryActivity extends AppCompatActivity {
     private ImageView calculator,pencil,notebook,stapler;
@@ -225,7 +233,8 @@ public class ProductCategoryActivity extends AppCompatActivity {
         mToolbar.setTitle("Choose a Category");
         setSupportActionBar(mToolbar);
 
-
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
 
@@ -233,4 +242,55 @@ public class ProductCategoryActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            // By using switch we can easily get
+            // the selected fragment
+            // by using there id.
+            Fragment selectedFragment = null;
+            switch (item.getItemId()) {
+                case R.id.seller_home:
+
+
+
+                    Intent home = new Intent(ProductCategoryActivity.this, MainActivity.class);
+                    startActivity(home);
+
+
+
+                    break;
+
+
+                case R.id.seller_add:
+
+                    Intent seller = new Intent(ProductCategoryActivity.this, ProductCategoryActivity.class);
+                    startActivity(seller);
+
+
+                    break;
+
+
+                case R.id.seller_logout:
+
+
+                    Paper.book().destroy();
+                    FirebaseAuth.getInstance().signOut();
+
+                    Intent intent = new Intent(ProductCategoryActivity.this, HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                    break;
+            }
+            // It will help to replace the
+            // one fragment to other.
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.fragment_container, selectedFragment)
+//                    .commit();
+            return true;
+        }
+    };
 }
