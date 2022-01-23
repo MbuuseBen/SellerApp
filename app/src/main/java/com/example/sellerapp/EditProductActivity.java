@@ -117,7 +117,7 @@ public class EditProductActivity extends AppCompatActivity {
             HashMap<String, Object> productMap = new HashMap<>();
             productMap.put("pid", productID);
             productMap.put("description", pDescription);
-            productMap.put("price", pPrice);
+            productMap.put("price", Integer.valueOf(pPrice));
             productMap.put("pname", pName);
 
             productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
