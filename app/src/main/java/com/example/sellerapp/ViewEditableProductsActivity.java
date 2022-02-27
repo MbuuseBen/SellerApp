@@ -57,7 +57,7 @@ public class ViewEditableProductsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         deleteBtn  = findViewById(R.id.deleteBtn2);
         editBtn  = findViewById(R.id.edit_item);
-        unverifiedProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        unverifiedProductsRef = FirebaseDatabase.getInstance().getReference().child("products");
 
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);

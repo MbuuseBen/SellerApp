@@ -45,7 +45,7 @@ public class AddNewProductActivity extends AppCompatActivity {
     private EditText InputProductName, InputProductDescription, InputProductPrice;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
-    private String productRandomKey, downloadImageUrl;
+    private String key, downloadImageUrl;
     private StorageReference ProductImagesRef;
     private DatabaseReference ProductsRef,SellersRef,ImageRef;
     private ProgressDialog loadingBar;
@@ -63,7 +63,7 @@ public class AddNewProductActivity extends AppCompatActivity {
 
         CategoryName = getIntent().getExtras().get("category").toString();
         ProductImagesRef = FirebaseStorage.getInstance().getReference().child("Product Images");
-        ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        ProductsRef = FirebaseDatabase.getInstance().getReference().child("products");
 
         ImageRef = FirebaseDatabase.getInstance().getReference().child("Cart List");
 
@@ -210,10 +210,12 @@ public class AddNewProductActivity extends AppCompatActivity {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
         saveCurrentTime = currentTime.format(calendar.getTime());
 
-        productRandomKey = saveCurrentDate + saveCurrentTime;
+       // productRandomKey = saveCurrentDate + saveCurrentTime;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+         key = database.getReference("products").push().getKey();
 
 
-        final StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() + productRandomKey + ".jpg");
+        final StorageReference filePath = ProductImagesRef.child(ImageUri.getLastPathSegment() + key + ".jpg");
 
         final UploadTask uploadTask = filePath.putFile(ImageUri);
 
@@ -269,7 +271,7 @@ public class AddNewProductActivity extends AppCompatActivity {
     private void SaveProductInfoToDatabase()
     {
         HashMap<String, Object> productMap = new HashMap<>();
-        productMap.put("pid", productRandomKey);
+        productMap.put("pid", key);
         productMap.put("date", saveCurrentDate);
         productMap.put("time", saveCurrentTime);
         productMap.put("description", Description);
@@ -284,7 +286,7 @@ public class AddNewProductActivity extends AppCompatActivity {
         productMap.put("sellerPhone", sPhone);
         productMap.put("productState","Not Approved");
 
-        ProductsRef.child(productRandomKey).updateChildren(productMap)
+        ProductsRef.child(key).updateChildren(productMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task)

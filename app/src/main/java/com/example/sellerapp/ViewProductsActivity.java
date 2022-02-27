@@ -55,7 +55,7 @@ public class ViewProductsActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        unverifiedProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
+        unverifiedProductsRef = FirebaseDatabase.getInstance().getReference().child("products");
 
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
