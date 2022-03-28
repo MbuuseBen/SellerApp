@@ -166,7 +166,7 @@ private void  viewSellerDetails(){
             if (dataSnapshot.exists()) {
                 Sellers sellers = dataSnapshot.getValue(Sellers.class);
 
-                sellerName.setText("Welcome Back " +sellers.getName());
+                sellerName.setText("Welcome Back, " +sellers.getName());
 
 
             }

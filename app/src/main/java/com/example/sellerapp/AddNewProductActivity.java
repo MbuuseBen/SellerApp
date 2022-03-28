@@ -279,6 +279,7 @@ public class AddNewProductActivity extends AppCompatActivity {
         productMap.put("category", CategoryName);
         productMap.put("price", Integer.valueOf(Price));
         productMap.put("pname", Pname);
+        productMap.put("availability", "Out of Stock");
         productMap.put("sellerID", sID);
         productMap.put("sellerName", sName);
         productMap.put("sellerAddress", sAddress);

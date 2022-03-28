@@ -64,7 +64,7 @@ public class ViewEditableProductsActivity extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.topAppBar);
-        mToolbar.setTitle("My Products");
+        mToolbar.setTitle("Edit Products");
         setSupportActionBar(mToolbar);
 
 

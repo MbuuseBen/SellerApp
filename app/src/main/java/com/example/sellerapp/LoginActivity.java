@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         if (passwordInput.getText().toString().isEmpty()) {
             passwordInput.setError(getResources().getString(R.string.password_error));
             isPasswordValid = false;
-        } else if (passwordInput.getText().length() < 10) {
+        } else if (passwordInput.getText().length() < 6) {
             passwordInput.setError(getResources().getString(R.string.error_invalid_password));
             isPasswordValid = false;
         } else  {
@@ -115,6 +115,12 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
+                            }
+
+                            else {
+                                Toast.makeText(LoginActivity.this, "Access Denied, Wrong Credentials", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+
                             }
                         }
                     });

@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (isNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
             registerSeller();
-            Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -161,12 +161,11 @@ public class RegisterActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull  Task<Void> task) {
                                                 loadingBar.dismiss();
-                                                Toast.makeText(RegisterActivity.this, "You are Registered Successfully , Please Login",Toast.LENGTH_SHORT).show();
-
-                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-
+                                               // Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(RegisterActivity.this, "Registered Successfully , Welcome",Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                                 startActivity(intent);
-
+                                                finish();
                                             }
                                         });
 

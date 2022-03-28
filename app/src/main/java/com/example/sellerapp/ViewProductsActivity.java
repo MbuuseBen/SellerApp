@@ -33,6 +33,7 @@ import com.google.firebase.database.annotations.NotNull;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 import io.paperdb.Paper;
 
@@ -41,8 +42,8 @@ public class ViewProductsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     private DatabaseReference unverifiedProductsRef;
-
-
+   // private DatabaseReference productsRef;
+    private String productID = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +55,9 @@ public class ViewProductsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
+        productID = getIntent().getStringExtra("pid");
         unverifiedProductsRef = FirebaseDatabase.getInstance().getReference().child("products");
-
+//        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("products").child(productID);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -96,35 +97,35 @@ public class ViewProductsActivity extends AppCompatActivity {
                         holder.txtProductPrice.setText("Price : UGX " + (new DecimalFormat("#,###.00")).format(Integer.valueOf(model.getPrice())));
                         Picasso.get().load(model.getImage()).into(holder.imageView);
 
-//                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                final  String productID = model.getPid();
-//                                CharSequence options [] = new CharSequence[] {
-//                                        "Yes",
-//                                        "No"
-//
-//                                };
-//
-//                                AlertDialog.Builder builder = new AlertDialog.Builder(ViewProductsActivity.this);
-//                                builder.setTitle("DO you want to delete this Product. Are You Sure?");
-//                                builder.setItems(options, new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialogInterface, int position) {
-//
-//                                        if (position == 0){
-//
-//                                            deleteProduct(productID);
-//
-//                                        }if (position == 0 ){
-//
-//                                        }
-//                                    }
-//                                });
-//
-//                                builder.show();
-//                            }
-//                        });
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                final  String productID = model.getPid();
+                                CharSequence options [] = new CharSequence[] {
+                                        "Yes",
+                                        "No"
+
+                                };
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(ViewProductsActivity.this);
+                                builder.setTitle("Is this Product available in Stock?");
+                                builder.setItems(options, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int position) {
+
+                                        if (position == 0){
+
+                                            availableProduct(productID);
+
+                                        }if (position == 1 ){
+                                            doneStock(productID);
+                                        }
+                                    }
+                                });
+
+                                builder.show();
+                            }
+                        });
 
                     }
 
@@ -144,17 +145,85 @@ public class ViewProductsActivity extends AppCompatActivity {
 
     }
 
-    private void deleteProduct(String productID) {
+    private void availableProduct(String productID) {
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("products").child(productID);
 
-        unverifiedProductsRef.child(productID)
-                .removeValue()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                        Toast.makeText(ViewProductsActivity.this, "Item Has been Deleted Successfully", Toast.LENGTH_SHORT).show();
+
+            HashMap<String, Object> productMap = new HashMap<>();
+            //  productMap.put("pid", productID;
+            productMap.put("availability", "available");
+
+
+            productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(ViewProductsActivity.this, "Changed availability successfully", Toast.LENGTH_LONG);
+
+                        Intent intent = new Intent(ViewProductsActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
-                });
+                    else {
+
+                        Toast.makeText(ViewProductsActivity.this, "Failed", Toast.LENGTH_LONG);
+
+                        Intent intent = new Intent(ViewProductsActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                }
+            });
+            // }
+
+        }
+
+    private void doneStock(String productID) {
+
+        DatabaseReference productsRef = FirebaseDatabase.getInstance().getReference().child("products").child(productID);
+
+        HashMap<String, Object> productMap = new HashMap<>();
+        //  productMap.put("pid", productID;
+        productMap.put("availability", "Out of Stock");
+
+
+        productsRef.updateChildren(productMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(ViewProductsActivity.this, "Changed availability successfully", Toast.LENGTH_LONG);
+
+                    Intent intent = new Intent(ViewProductsActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+
+                    Toast.makeText(ViewProductsActivity.this, "Failed", Toast.LENGTH_LONG);
+
+                    Intent intent = new Intent(ViewProductsActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+        });
+        // }
+
     }
+
+//        private void deleteProduct(String productID) {
+//
+//        unverifiedProductsRef.child(productID)
+//                .removeValue()
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                        Toast.makeText(ViewProductsActivity.this, "Item Has been Deleted Successfully", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

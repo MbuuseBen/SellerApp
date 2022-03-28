@@ -36,9 +36,9 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
+        android:background="@drawable/input_design3"
         android:drawableStart="@drawable/ic_baseline_account_circle_24"
-        android:hint="Name"
+        android:hint="Business Name"
         android:padding="10dp" />
 
 
@@ -50,7 +50,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
+        android:background="@drawable/input_design3"
         android:drawableStart="@drawable/ic_baseline_phone_iphone_24"
         android:hint="PhoneNumber"
         android:inputType="number"
@@ -64,40 +64,65 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
+        android:background="@drawable/input_design3"
         android:drawableStart="@drawable/ic_baseline_email_icon1"
-        android:background="@drawable/input_design"
         android:hint="Email Address"
         android:inputType="textEmailAddress"
         android:padding="10dp" />
 
-    <EditText
-        android:id="@+id/seller_password"
-        android:layout_width="match_parent"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/user_login_pw"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/seller_email"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
-        android:drawableStart="@drawable/ic_baseline_lock_open_24"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp" />
+        android:layout_width="match_parent"
+        app:boxBackgroundMode="outline"
+        app:passwordToggleEnabled="true"
+        android:layout_below="@+id/seller_email">
+
+
+        <EditText
+            android:id="@+id/seller_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seller_email"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/input_design3"
+            android:drawableStart="@drawable/ic_baseline_lock_open_24"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <EditText-->
+<!--        android:id="@+id/seller_password"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/seller_email"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginRight="15dp"-->
+<!--        android:background="@drawable/input_design"-->
+<!--        android:drawableStart="@drawable/ic_baseline_lock_open_24"-->
+<!--        android:hint="Password"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:padding="10dp" />-->
 
 
     <EditText
         android:id="@+id/seller_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/seller_password"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:inputType="textEmailAddress"
-        android:hint="Address"
+        android:layout_below="@+id/user_login_pw"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/input_design"
-        />
+        android:background="@drawable/input_design3"
+        android:hint="Address"
+        android:inputType="textEmailAddress"
+        android:padding="10dp" />
 
 
     <Button
